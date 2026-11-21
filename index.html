@@ -309,12 +309,12 @@
       margin: 18px auto;
       padding: 0 16px 40px;
       display: grid;
-      grid-template-columns: 445px 1fr;
+      grid-template-columns: minmax(340px, 445px) minmax(0, 1fr);
       gap: 20px;
       align-items: start;
     }
     @media (max-width: 1024px) {
-      .workspace { grid-template-columns: 1fr; }
+      .workspace { grid-template-columns: minmax(0, 1fr); }
     }
 
     .editor-panel {
@@ -323,6 +323,7 @@
       border: 1px solid var(--border);
       padding: 18px;
       box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+      min-width: 0;
     }
     .editor-top-bar {
       display: flex;
@@ -347,11 +348,11 @@
     .section-title:first-child { margin-top: 0; }
     .grid-2 {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
     }
     @media (max-width: 520px) {
-      .grid-2 { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: minmax(0, 1fr); }
     }
 
     .swatch-row {
@@ -412,20 +413,22 @@
       color: #475569;
     }
 
-    /* A4 Preview Container */
+    /* A4 Preview Container - Responsive & Unclipped */
     .preview-shell {
       background: #cbd5e1;
       border-radius: 12px;
-      padding: 18px;
+      padding: 16px;
       overflow-x: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       scroll-margin-top: 72px;
+      min-width: 0;
+      width: 100%;
     }
     .preview-toolbar {
       width: 100%;
-      max-width: 210mm;
+      max-width: 794px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -437,19 +440,22 @@
       font-weight: 700;
     }
     .a4-page {
-      width: 210mm;
-      min-height: 297mm;
+      width: 100%;
+      max-width: 794px;
+      min-height: 1122px;
       background: #ffffff;
       color: #1e293b;
       box-shadow: 0 12px 32px rgba(15, 23, 42, 0.22);
       position: relative;
       overflow: visible;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     /* Shared CV Elements */
     .cv-photo {
-      width: 102px;
-      height: 102px;
+      width: 98px;
+      height: 98px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--primary);
@@ -473,6 +479,7 @@
       justify-content: space-between;
       align-items: baseline;
       gap: 8px;
+      flex-wrap: wrap;
       font-weight: 700;
       font-size: 0.9rem;
     }
@@ -511,13 +518,17 @@
     /* Template 1: Cabinet Classique Gauche */
     .tpl-cabinet-left {
       display: grid;
-      grid-template-columns: 74mm 1fr;
-      min-height: 297mm;
+      grid-template-columns: 265px minmax(0, 1fr);
+      min-height: 1122px;
+    }
+    @media (max-width: 640px) {
+      .tpl-cabinet-left { grid-template-columns: minmax(0, 1fr); }
     }
     .tpl-cabinet-left .cv-left {
       background: var(--primary);
       color: #ffffff;
       padding: 24px 18px;
+      min-width: 0;
     }
     .tpl-cabinet-left .cv-left .cv-section-heading {
       color: #ffffff;
@@ -541,6 +552,7 @@
     .tpl-cabinet-left .cv-right {
       padding: 26px 26px;
       background: #ffffff;
+      min-width: 0;
     }
     .tpl-cabinet-left .cv-hero-header {
       border-bottom: 2px solid var(--primary);
@@ -548,7 +560,7 @@
       margin-bottom: 16px;
     }
     .tpl-cabinet-left .cv-name {
-      font-size: 1.62rem;
+      font-size: 1.58rem;
       font-weight: 800;
       color: var(--primary);
       line-height: 1.15;
@@ -565,23 +577,24 @@
       height: 92px;
     }
 
-    /* Template 2: Sommet Exécutif (Bandeau foncé pleine largeur + cartes) */
+    /* Template 2: Sommet Exécutif */
     .tpl-sommet-executif {
       background: #ffffff;
-      min-height: 297mm;
+      min-height: 1122px;
     }
     .tpl-sommet-executif .cv-exec-banner {
       background: #0f172a;
       color: #ffffff;
-      padding: 24px 30px;
+      padding: 24px 28px;
       border-bottom: 5px solid var(--primary);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      gap: 18px;
+      flex-wrap: wrap;
     }
     .tpl-sommet-executif .cv-name {
-      font-size: 1.72rem;
+      font-size: 1.68rem;
       font-weight: 800;
       letter-spacing: 0.4px;
       color: #ffffff;
@@ -605,19 +618,23 @@
       border-color: #ffffff;
     }
     .tpl-sommet-executif .cv-exec-body {
-      padding: 22px 30px;
+      padding: 22px 28px;
     }
     .tpl-sommet-executif .cv-kpi-strip {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
       margin-bottom: 16px;
+    }
+    @media (max-width: 640px) {
+      .tpl-sommet-executif .cv-kpi-strip { grid-template-columns: minmax(0, 1fr); }
     }
     .tpl-sommet-executif .cv-kpi-box {
       background: var(--primary-light);
       border: 1px solid rgba(30, 58, 138, 0.2);
       border-radius: 8px;
       padding: 8px 10px;
+      min-width: 0;
     }
     .tpl-sommet-executif .cv-kpi-label {
       font-size: 0.69rem;
@@ -633,23 +650,34 @@
       margin-top: 2px;
     }
 
-    /* Template 3: Horizon Asymétrique (Colonne droite accentuée + chronologie) */
+    /* Template 3: Horizon Asymétrique */
     .tpl-horizon-asym {
       display: grid;
-      grid-template-columns: 1fr 68mm;
-      min-height: 297mm;
+      grid-template-columns: minmax(0, 1fr) 250px;
+      min-height: 1122px;
       background: #ffffff;
     }
+    @media (max-width: 640px) {
+      .tpl-horizon-asym { grid-template-columns: minmax(0, 1fr); }
+    }
     .tpl-horizon-asym .cv-main-col {
-      padding: 26px 26px;
+      padding: 26px 24px;
+      min-width: 0;
     }
     .tpl-horizon-asym .cv-side-col {
       background: var(--primary-light);
       border-left: 4px solid var(--primary);
       padding: 24px 18px;
+      min-width: 0;
+    }
+    @media (max-width: 640px) {
+      .tpl-horizon-asym .cv-side-col {
+        border-left: none;
+        border-top: 4px solid var(--primary);
+      }
     }
     .tpl-horizon-asym .cv-name {
-      font-size: 1.66rem;
+      font-size: 1.62rem;
       font-weight: 900;
       color: #0f172a;
       line-height: 1.15;
@@ -674,15 +702,15 @@
       word-break: break-word;
     }
 
-    /* Template 4: Grille Directionnelle (Blocs structurés en grille) */
+    /* Template 4: Grille Directionnelle */
     .tpl-grille-dir {
-      padding: 24px 28px;
+      padding: 24px 26px;
       background: #ffffff;
-      min-height: 297mm;
+      min-height: 1122px;
     }
     .tpl-grille-dir .cv-grid-top {
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 16px;
       align-items: center;
       background: var(--primary-light);
@@ -691,8 +719,11 @@
       padding: 16px 20px;
       margin-bottom: 16px;
     }
+    @media (max-width: 640px) {
+      .tpl-grille-dir .cv-grid-top { grid-template-columns: minmax(0, 1fr); }
+    }
     .tpl-grille-dir .cv-name {
-      font-size: 1.58rem;
+      font-size: 1.56rem;
       font-weight: 800;
       color: var(--primary);
     }
@@ -704,16 +735,22 @@
     }
     .tpl-grille-dir .cv-contact-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 4px 14px;
       font-size: 0.78rem;
       color: #334155;
       margin-top: 8px;
     }
+    @media (max-width: 520px) {
+      .tpl-grille-dir .cv-contact-grid { grid-template-columns: minmax(0, 1fr); }
+    }
     .tpl-grille-dir .cv-bento-2 {
       display: grid;
-      grid-template-columns: 1.25fr 1fr;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
       gap: 16px;
+    }
+    @media (max-width: 640px) {
+      .tpl-grille-dir .cv-bento-2 { grid-template-columns: minmax(0, 1fr); }
     }
     .tpl-grille-dir .cv-box-card {
       border: 1px solid #cbd5e1;
@@ -722,17 +759,18 @@
       padding: 12px 14px;
       margin-bottom: 14px;
       background: #ffffff;
+      min-width: 0;
     }
     .tpl-grille-dir .cv-box-card .cv-section-heading {
       border-bottom: 1px solid #e2e8f0;
       font-size: 0.82rem;
     }
 
-    /* Template 5: Épuré Suisse (Typographie éditoriale minimaliste et lignes fines) */
+    /* Template 5: Épuré Suisse */
     .tpl-epure-suisse {
-      padding: 28px 32px;
+      padding: 28px 30px;
       background: #ffffff;
-      min-height: 297mm;
+      min-height: 1122px;
       font-family: Georgia, 'Times New Roman', serif;
     }
     .tpl-epure-suisse .cv-section-heading,
@@ -744,7 +782,8 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 20px;
+      gap: 18px;
+      flex-wrap: wrap;
       padding-bottom: 14px;
       margin-bottom: 16px;
       border-top: 4px solid var(--primary);
@@ -752,7 +791,7 @@
       padding-top: 12px;
     }
     .tpl-epure-suisse .cv-name {
-      font-size: 1.7rem;
+      font-size: 1.66rem;
       font-weight: 700;
       color: #0f172a;
       font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -862,7 +901,7 @@
     }
     .print-modal-bar {
       width: 100%;
-      max-width: 210mm;
+      max-width: 794px;
       background: #0f172a;
       color: #ffffff;
       border-radius: 10px;
@@ -939,6 +978,7 @@
       }
       .a4-page {
         width: 210mm !important;
+        max-width: 210mm !important;
         min-height: 297mm !important;
         height: auto !important;
         box-shadow: none !important;
@@ -1126,7 +1166,7 @@
         </div>
         <div class="form-group">
           <label for="cvExtraInfo">Permis / Disponibilité</label>
-          <input type="text" id="cvExtraInfo" class="form-control" placeholder="Permis: B" oninput="updateCV()" />
+          <input type="text" id="cvExtraInfo" class="form-control" placeholder="Permis B" oninput="updateCV()" />
         </div>
       </div>
 
@@ -1344,7 +1384,7 @@
       phone: '+226 70 45 82 19',
       email: 'karim.ouedraogo.exemple@gmail.com',
       address: 'Ouagadougou, Burkina Faso',
-      extraInfo: 'Permis: B',
+      extraInfo: 'Permis B',
       summaryCustomized: false,
       autoSummarySync: true,
       summary: 'Cadre rigoureux et méthodique avec une solide expérience en gestion administrative, contrôle budgétaire et analyse financière. Reconnu pour sa fiabilité, son sens de l’organisation et sa capacité à structurer les processus opérationnels au service de la performance.',
@@ -1569,8 +1609,9 @@
 
       rootEl.style.setProperty('--primary', pColor);
       rootEl.style.setProperty('--primary-light', lColor);
-      rootEl.style.width = '210mm';
-      rootEl.style.minHeight = '297mm';
+      rootEl.style.width = '794px';
+      rootEl.style.maxWidth = '794px';
+      rootEl.style.minHeight = '1122px';
       rootEl.style.background = '#ffffff';
       rootEl.style.color = '#1e293b';
       rootEl.style.boxShadow = 'none';
@@ -1589,6 +1630,8 @@
       });
 
       if (rootEl.classList.contains('tpl-cabinet-left')) {
+        rootEl.style.display = 'grid';
+        rootEl.style.gridTemplateColumns = '265px minmax(0, 1fr)';
         const left = rootEl.querySelector('.cv-left');
         if (left) {
           left.style.background = pColor;
@@ -1620,10 +1663,13 @@
         const photoEl = rootEl.querySelector('.cv-photo');
         if (photoEl) photoEl.style.borderColor = '#ffffff';
       } else if (rootEl.classList.contains('tpl-horizon-asym')) {
+        rootEl.style.display = 'grid';
+        rootEl.style.gridTemplateColumns = 'minmax(0, 1fr) 250px';
         const side = rootEl.querySelector('.cv-side-col');
         if (side) {
           side.style.background = lColor;
           side.style.borderLeftColor = pColor;
+          side.style.borderTop = 'none';
         }
         const titleEl = rootEl.querySelector('.cv-title');
         if (titleEl) titleEl.style.color = pColor;
@@ -1666,12 +1712,12 @@
       padding: 10px 16px; display: flex; gap: 10px; align-items: center; justify-content: space-between;
     }
     .print-sheet-wrap { display: flex; justify-content: center; padding: 16px; }
-    .a4-page { box-shadow: 0 12px 28px rgba(0,0,0,0.2); }
+    .a4-page { box-shadow: 0 12px 28px rgba(0,0,0,0.2); width: 210mm; max-width: 210mm; min-height: 297mm; }
     @media print {
       body { background: #fff; }
       .print-toolbar { display: none !important; }
       .print-sheet-wrap { padding: 0 !important; display: block !important; }
-      .a4-page { box-shadow: none !important; margin: 0 !important; }
+      .a4-page { box-shadow: none !important; margin: 0 !important; width: 210mm !important; max-width: 210mm !important; min-height: 297mm !important; }
     }
   </style>
 </head>
@@ -1694,7 +1740,7 @@
 
     function openStandalonePrintTabOrPdfFallback() {
       const sourceEl = document.getElementById('cvPreview');
-      if (!sourceEl) return;
+      if (!sourceEl) return false;
 
       const clone = sourceEl.cloneNode(true);
       clone.id = 'printTabCvPage';
@@ -1715,7 +1761,6 @@
         URL.revokeObjectURL(blobUrl);
       } catch {}
 
-      downloadPdfCV();
       return false;
     }
 
@@ -1806,9 +1851,12 @@
 
       triggerNativePrintAttempt(() => {
         if (hintEl) {
-          hintEl.textContent = 'Impression bloquée par cet aperçu : ouverture dans un onglet A4 ou téléchargement PDF...';
+          hintEl.textContent = 'Ouverture dans un onglet A4 ou utilisation de « Enregistrer en PDF »...';
         }
-        openStandalonePrintTabOrPdfFallback();
+        const opened = openStandalonePrintTabOrPdfFallback();
+        if (!opened) {
+          downloadPdfCV();
+        }
       });
     }
 
@@ -1827,30 +1875,20 @@
       clone.id = 'printFrameCvPage';
       applyResolvedStylesToPrintNode(clone);
 
-      const isSandboxedIframe = (() => {
-        try {
-          return window.self !== window.top;
-        } catch {
-          return true;
-        }
-      })();
-
       openFullScreenPrintOverlay();
       printIntoSandboxFrame(clone.outerHTML, docTitle);
 
-      if (isSandboxedIframe) {
-        setTimeout(() => {
-          triggerNativePrintAttempt(() => {
-            openStandalonePrintTabOrPdfFallback();
-          });
-        }, 120);
-      } else {
-        setTimeout(() => {
-          triggerNativePrintAttempt(() => {
-            openStandalonePrintTabOrPdfFallback();
-          });
-        }, 120);
-      }
+      setTimeout(() => {
+        triggerNativePrintAttempt(() => {
+          const opened = openStandalonePrintTabOrPdfFallback();
+          if (!opened) {
+            const hintEl = document.getElementById('printModalHint');
+            if (hintEl) {
+              hintEl.textContent = 'Cliquez sur « Lancer l\'impression » ou « Enregistrer en PDF » ci-dessus.';
+            }
+          }
+        });
+      }, 120);
     }
 
     async function downloadPdfCV() {
@@ -1860,25 +1898,26 @@
       const safeName = (cvState.fullName || 'CV_Professionnel').replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '_');
       const fileName = `CV_${safeName}.pdf`;
 
+      const pdfButtons = document.querySelectorAll('#btnDownloadPdfTop, .preview-toolbar .btn-primary, .editor-panel .btn-primary');
+      pdfButtons.forEach(b => { b.disabled = true; });
+
       const html2canvasFn = window.html2canvas;
       const jsPDFCtor = window.jspdf?.jsPDF;
 
       if (typeof html2canvasFn === 'function' && typeof jsPDFCtor === 'function') {
-        const pdfButtons = document.querySelectorAll('#btnDownloadPdfTop, .preview-toolbar .btn-primary, .editor-panel .btn-primary');
-        pdfButtons.forEach(b => { b.disabled = true; });
-
         const captureHost = document.createElement('div');
         captureHost.style.position = 'fixed';
         captureHost.style.left = '-10000px';
         captureHost.style.top = '0';
-        captureHost.style.width = '210mm';
+        captureHost.style.width = '794px';
         captureHost.style.background = '#ffffff';
         captureHost.style.zIndex = '-1';
 
         const clone = previewEl.cloneNode(true);
         clone.id = 'cvPdfCaptureClone';
-        clone.style.width = '210mm';
-        clone.style.minHeight = '297mm';
+        clone.style.width = '794px';
+        clone.style.maxWidth = '794px';
+        clone.style.minHeight = '1122px';
         clone.style.boxShadow = 'none';
         clone.style.margin = '0';
         applyResolvedStylesToPrintNode(clone);
@@ -1891,8 +1930,8 @@
             useCORS: true,
             allowTaint: true,
             backgroundColor: '#ffffff',
-            windowWidth: clone.scrollWidth,
-            windowHeight: clone.scrollHeight
+            windowWidth: 794,
+            windowHeight: Math.max(1122, clone.scrollHeight)
           });
 
           const pdf = new jsPDFCtor({
@@ -1909,7 +1948,7 @@
           let heightLeftMm = imgHeightMm;
           let positionMm = 0;
 
-          const imgData = canvas.toDataURL('image/jpeg', 0.96);
+          const imgData = canvas.toDataURL('image/jpeg', 0.95);
           pdf.addImage(imgData, 'JPEG', 0, positionMm, imgWidthMm, imgHeightMm, undefined, 'FAST');
           heightLeftMm -= pageHeightMm;
 
@@ -1921,21 +1960,23 @@
           }
 
           pdf.save(fileName);
-          document.body.removeChild(captureHost);
+          if (captureHost.parentNode) document.body.removeChild(captureHost);
           pdfButtons.forEach(b => { b.disabled = false; });
           return;
         } catch {
           if (captureHost.parentNode) document.body.removeChild(captureHost);
-          pdfButtons.forEach(b => { b.disabled = false; });
         }
       }
 
-      const prevTitle = document.title;
-      document.title = `CV_${safeName}`;
-      window.print();
-      setTimeout(() => {
-        document.title = prevTitle;
-      }, 1000);
+      pdfButtons.forEach(b => { b.disabled = false; });
+      const opened = openStandalonePrintTabOrPdfFallback();
+      if (!opened) {
+        openFullScreenPrintOverlay();
+        const hintEl = document.getElementById('printModalHint');
+        if (hintEl) {
+          hintEl.textContent = 'Utilisez « Lancer l\'impression » puis choisissez « Enregistrer au format PDF » dans votre navigateur.';
+        }
+      }
     }
 
     function scrollToPreview() {
@@ -1964,7 +2005,7 @@
         phone: '+226 70 45 82 19',
         email: 'karim.ouedraogo.exemple@gmail.com',
         address: 'Ouagadougou, Burkina Faso',
-        extraInfo: 'Permis: B',
+        extraInfo: 'Permis B',
         summaryCustomized: true,
         summary: 'Cadre rigoureux et méthodique avec une solide expérience en gestion administrative, contrôle budgétaire et analyse financière. Reconnu pour sa fiabilité, son sens de l’organisation et sa capacité à structurer les processus opérationnels au service de la performance.',
         experiences: [
@@ -2664,6 +2705,10 @@
       return String(str || '').split(',').map(s => s.trim()).filter(Boolean);
     }
 
+    function cleanExtraLabel(val) {
+      return String(val || '').trim();
+    }
+
     function updateCV() {
       const session = getActiveSession();
       if (session) {
@@ -2692,11 +2737,12 @@
         ? `<img src="${cvState.photo}" alt="Photo" class="cv-photo" />`
         : '';
 
+      const cleanExtra = cleanExtraLabel(cvState.extraInfo);
       const contacts = [
-        cvState.phone ? `📞 ${escapeHtml(cvState.phone)}` : '',
-        cvState.email ? `✉️ ${escapeHtml(cvState.email)}` : '',
-        cvState.address ? `📍 ${escapeHtml(cvState.address)}` : '',
-        cvState.extraInfo ? `?? ${escapeHtml(cvState.extraInfo)}` : ''
+        cvState.phone ? escapeHtml(cvState.phone) : '',
+        cvState.email ? escapeHtml(cvState.email) : '',
+        cvState.address ? escapeHtml(cvState.address) : '',
+        cleanExtra ? escapeHtml(cleanExtra) : ''
       ].filter(Boolean);
 
       const summaryHtml = cvState.summary.trim() ? `
@@ -2746,14 +2792,14 @@
       const langsHtml = langsArr.length ? `
         <div class="cv-section">
           <div class="cv-section-heading">Langues</div>
-          <ul class="cv-list-clean">${langsArr.map(l => `<li>• ${escapeHtml(l)}</li>`).join('')}</ul>
+          <ul class="cv-list-clean">${langsArr.map(l => `<li>${escapeHtml(l)}</li>`).join('')}</ul>
         </div>` : '';
 
       const intArr = splitTags(cvState.interests);
       const intHtml = intArr.length ? `
         <div class="cv-section">
           <div class="cv-section-heading">Centres d'Intérêt</div>
-          <ul class="cv-list-clean">${intArr.map(x => `<li>• ${escapeHtml(x)}</li>`).join('')}</ul>
+          <ul class="cv-list-clean">${intArr.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul>
         </div>` : '';
 
       const refHtml = cvState.references.some(r => r.name || r.role) ? `
@@ -2820,7 +2866,7 @@
             ${summaryHtml}
             ${expHtml}
             ${eduHtml}
-            <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:20px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:20px;">
               <div>${skillsHtml}</div>
               <div>${langsHtml}${intHtml}${refHtml}</div>
             </div>
@@ -2884,7 +2930,7 @@
           ${expHtml}
           ${eduHtml}
           ${skillsHtml}
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:20px;">
             <div>${langsHtml}${intHtml}</div>
             <div>${refHtml}</div>
           </div>
